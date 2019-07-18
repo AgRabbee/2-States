@@ -109,19 +109,27 @@ class BoxController extends Controller
         ];
         return view('box.addProductToBox')->with($data);
     }
+
     public function storeProductInBox(Request $request){
         $this->validate($request,[
             'box_id' => 'required',
             'products_id' => 'required',
         ]);
 
-        $box_product = new Box_products;
-        for ($i=0; $i < $request->input('products_id'); $i++) {
+
+        //dd($request->input('products_id'));
+        $id = $request->input('products_id');
+        //return $id;
+        for ($i=0; $i < count($id); $i++) {
+            $box_product = new Box_products;
             $box_product->box_id = $request->input('box_id');
-            $box_product->products_id = $request->input('products_id');
+            $box_product->product_id = $id[$i];
+
             $box_product->save();
+
         }
 
+        //return 123;
         return redirect('/boxes')->with('success', 'Product added successfully.');
     }
 }
