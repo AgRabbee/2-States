@@ -37,3 +37,5 @@ Route::post('/box/add','BoxController@store');
 Route::get('/box/show/{id}','BoxController@show');
 Route::get('/box/add/product','BoxController@addProduct');
 Route::post('/box/add/product','BoxController@storeProductInBox');
+
+Route::get('/subscriptions','SubscriptionController@index');

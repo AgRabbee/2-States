@@ -6,6 +6,7 @@ use App\Box;
 use App\Product;
 use App\Box_products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BoxController extends Controller
 {
@@ -61,8 +62,40 @@ class BoxController extends Controller
     public function show($id)
     {
         $box = Box::find($id);
-
         return view('box.show')->with('box',$box);
+
+
+//try one
+        /*$box = Box::find($id);
+        $boxProduct = Box_products::find($id);
+        $product= Product::find($boxProduct->product_id);
+
+        $data =[
+            'boxProduct' => $box,
+            'product' => $product,
+        ];
+        //dd($data);
+        return view('box.show')->with('data',$data);
+*/
+//try two
+        /*$data = DB::table('boxes')
+            ->join('box_products','box_products.box_id','boxes.id')
+            ->leftJoin('products','box_products.product_id', 'products.id')
+            ->get()
+            ->toArray();
+
+            //echo '<pre>';
+            //print_r($data);
+            return view('box.show')->with('data',$data);*/
+
+//try three
+            /*$box = Box::all();
+            $product = Product::all();
+            $data = [
+                'boxes' => $box,
+                'products' =>$product
+            ];
+            return view('box.show')->with($data);*/
     }
 
     /**

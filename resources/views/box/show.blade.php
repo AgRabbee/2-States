@@ -12,11 +12,19 @@
     <table class="table table-stripped">
         <tr>
             <th>Name</th>
+            <th>Products</th>
             <th>Price</th>
         </tr>
         <tr>
+
+
             <td>{{ $box->name }}</td>
+            <td>
+                No Products yet
+
+            </td>
             <td>{{ $box->price }}</td>
+
         </tr>
     </table>
 @endsection
