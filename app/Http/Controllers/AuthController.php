@@ -26,15 +26,18 @@ class AuthController extends Controller
         $user->save();
         $user->roles()->attach(Role::where('name','Customer')->first());
         Auth::login($user);
-        return redirect()->route('main');
+        return redirect('/dashboard');
     }
 
     public function postSignIn(Request $request){
         if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']])){
-            if(Role::where('name','admin')->first()){
-                return redirect()->route('admin');
+
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('manager')){
+                return redirect('/admin/dashboard');
+            }elseif(Auth::user()->hasRole('customer')) {
+                return redirect('/dashboard');
             }
-            return redirect()->route('main');
+
         }
         return redirect()->back();
     }

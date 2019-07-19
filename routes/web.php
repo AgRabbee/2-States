@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('main');
+Route::get('/dashboard','DashboardController@index');
 Route::get('signin', 'AuthController@getSignInPage');
 Route::post('signin', 'AuthController@postSignIn');
 Route::get('signup', 'AuthController@getSignUpPage');
@@ -25,7 +25,7 @@ Route::post('signup', 'AuthController@postSignUp');
 Route::get('signout', 'AuthController@getLogout');
 
 
-Route::get('/dashboard','DashboardController@admin')->name('admin');
+Route::get('/admin/dashboard','DashboardController@admin');
 Route::get('/products','ProductController@index');
 Route::get('/products/add','ProductController@create');
 Route::post('/products/add','ProductController@store');

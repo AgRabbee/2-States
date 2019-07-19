@@ -26,14 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
     public function roles(){
-        //one role belongs to many user, maching table user_role, 
-        //user_id is the foreign key from this table 
+        //one role belongs to many user, maching table user_role,
+        //user_id is the foreign key from this table
         //role_id is the foreign key form user table in maching table
         return $this->belongsToMany('App\Models\Role','user_role','user_id','role_id');
     }
-    
+
     public function hasAnyRole($roles){
         if(is_array($roles)){
             foreach($roles AS $role){
@@ -46,10 +46,10 @@ class User extends Authenticatable
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public function hasRole($role){
         if($this->roles()->where('name',$role)->first()){
             return true;
