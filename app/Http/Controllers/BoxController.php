@@ -21,6 +21,7 @@ class BoxController extends Controller
         return view('box.index')->with('boxes',$boxes);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -165,4 +166,13 @@ class BoxController extends Controller
         //return 123;
         return redirect('/boxes')->with('success', 'Product added successfully.');
     }
+
+    //welcome view for customer
+    public function welcome()
+    {
+        $boxes = Box::orderby('created_at','desc')->paginate(5);
+        return view('pages.index')->with('boxes',$boxes);
+    }
+
+
 }

@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('pages.index');
-});
-
+});*/
+Route::get('/','BoxController@welcome');
 Auth::routes();
 
 Route::get('/dashboard','DashboardController@index');
@@ -39,3 +39,4 @@ Route::get('/box/add/product','BoxController@addProduct');
 Route::post('/box/add/product','BoxController@storeProductInBox');
 
 Route::get('/subscriptions','SubscriptionController@index');
+//Route::get('','SubscriptionController@store');
