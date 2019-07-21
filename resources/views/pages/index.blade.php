@@ -25,9 +25,7 @@
                              <a href="#" class="btn btn-primary btn-sm float-left">Show Details</a>
 
                              <!-- Button trigger modal -->
-                             <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
-                                 Proceed to Subscribe
-                             </button>
+                             <a href="#" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal">Proceed to Subscribe</a>
 
                              <!-- Modal -->
                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -41,14 +39,19 @@
                                    </div>
                                     <form action="" method="post">
                                        <div class="modal-body">
-                                           <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                              <label class="form-check-label" for="inlineRadio1">1</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                              <label class="form-check-label" for="inlineRadio2">2</label>
-                                            </div>
+                                           @if (count($methods) > 0)
+                                               @foreach ($methods as $method)
+                                                   <div class="form-check form-check-inline">
+                                                      <input class="form-check-input" type="radio" name="method_id" id="btn{{$method->id}}" value="{{$method->id}}">
+                                                      <label class="form-check-label" for="btn{{$method->id}}">{{ $method->method_name }}</label>
+                                                    </div>
+
+                                               @endforeach
+                                           @else
+                                               <p>No available delivery method. You need to collect your box from the storefront.</p>
+                                           @endif
+
+
                                        </div>
                                        <div class="modal-footer">
                                              <div class="form-group">

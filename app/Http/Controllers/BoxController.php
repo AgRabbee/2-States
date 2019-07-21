@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Box;
 use App\Product;
 use App\Box_products;
+use App\DeliveryMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -171,7 +172,12 @@ class BoxController extends Controller
     public function welcome()
     {
         $boxes = Box::orderby('created_at','desc')->paginate(5);
-        return view('pages.index')->with('boxes',$boxes);
+        $methods = DeliveryMethod::all();
+        $data = array(
+            'boxes' => $boxes,
+            'methods' => $methods
+        );
+        return view('pages.index')->with($data);
     }
 
 

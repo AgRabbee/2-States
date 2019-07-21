@@ -26,17 +26,27 @@ Route::get('signout', 'AuthController@getLogout');
 
 
 Route::get('/admin/dashboard','DashboardController@admin');
-Route::get('/products','ProductController@index');
-Route::get('/products/add','ProductController@create');
-Route::post('/products/add','ProductController@store');
-Route::get('/product/show/{id}','ProductController@show');
 
-Route::get('/boxes','BoxController@index');
-Route::get('/box/add','BoxController@create');
-Route::post('/box/add','BoxController@store');
-Route::get('/box/show/{id}','BoxController@show');
-Route::get('/box/add/product','BoxController@addProduct');
-Route::post('/box/add/product','BoxController@storeProductInBox');
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('/products','ProductController@index');
+    Route::get('/products/add','ProductController@create');
+    Route::post('/products/add','ProductController@store');
+    Route::get('/product/show/{id}','ProductController@show');
 
-Route::get('/subscriptions','SubscriptionController@index');
-//Route::get('','SubscriptionController@store');
+
+
+
+
+
+
+    Route::get('/boxes','BoxController@index');
+    Route::get('/box/add','BoxController@create');
+    Route::post('/box/add','BoxController@store');
+    Route::get('/box/show/{id}','BoxController@show');
+    Route::get('/box/add/product','BoxController@addProduct');
+    Route::post('/box/add/product','BoxController@storeProductInBox');
+
+    Route::get('/subscriptions','SubscriptionController@index');
+    Route::get('/subscriptions/create','SubscriptionController@create');
+
+});
