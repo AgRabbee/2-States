@@ -47,6 +47,10 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/box/add/product','BoxController@storeProductInBox');
 
     Route::get('/subscriptions','SubscriptionController@index');
-    Route::get('/subscriptions/create','SubscriptionController@create');
 
+});
+
+Route::group(['middleware'=>['auth','auth.customer']],function(){
+    Route::get('/subscriptions/create/{id}','SubscriptionController@create');
+    Route::post('/subscriptions/create','SubscriptionController@store');
 });

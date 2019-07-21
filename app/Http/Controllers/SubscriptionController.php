@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Subscription;
+use App\Box;
+use App\DeliveryMethod;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -23,9 +25,15 @@ class SubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $box = Box::find($id);
+        $methods = DeliveryMethod::all();
+        $data = array(
+            'box' => $box,
+            'methods' => $methods
+        );
+        return view('subscriptions.create')->with($data);
     }
 
     /**

@@ -172,12 +172,8 @@ class BoxController extends Controller
     public function welcome()
     {
         $boxes = Box::orderby('created_at','desc')->paginate(5);
-        $methods = DeliveryMethod::all();
-        $data = array(
-            'boxes' => $boxes,
-            'methods' => $methods
-        );
-        return view('pages.index')->with($data);
+
+        return view('pages.index')->with('boxes',$boxes);
     }
 
 
