@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
 
-        <form class="col-md-8 m-auto" action="{{ url('/subscriptions/create') }}" method="post">
+        <form class="col-md-8 m-auto" action="{{ url('/subscriptions/create') }}" method="POST">
+            {{ csrf_field() }}
             <h4>Your Desire Booty Box</h4>
             <hr>
             <div class="form-group row pt-2">
@@ -24,18 +24,18 @@
                     @if (count($methods)>0)
                         @foreach ($methods as $method)
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="btn{{$method->id}}" value="{{$method->id}}">
+                                <input class="form-check-input" type="radio" name="DeliveryMethod" id="btn{{$method->id}}" value="{{$method->id}}">
                                 <label class="form-check-label" for="btn{{$method->id}}">{{ $method->method_name }}</label>
                             </div>
                         @endforeach
                     @endif
                 </div>
             </div>
-            <div class="form-group">
+
+                <input type="hidden" name="box_id" value="{{ $box->id }}">
                 <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Subscribe">
-            </div>
+
 
 
         </form>
-    </div>
 @endsection

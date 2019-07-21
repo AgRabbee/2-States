@@ -19,7 +19,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('box_id');
             $table->integer('delivery_method_id');
             $table->timestamps();
-            $table->integer('status')->comment="0->pending; 1->paused; 2->delivered";
+            $table->integer('status')->comment="0->Active; 1->paused; 2->delivered";
         });
     }
 

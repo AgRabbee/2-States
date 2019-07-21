@@ -16,15 +16,19 @@
             <th>Price</th>
         </tr>
         <tr>
-
-
-            <td>{{ $box->name }}</td>
+            <td>{{ $box_details->name }}</td>
             <td>
-                No Products yet
-
+                <ul>
+                    @if(count($products) > 0)
+                        @foreach ($products as $product)
+                            <li>{{ $product->name }}</li>
+                        @endforeach
+                    @else
+                        No available Products
+                    @endif
+                </ul>
             </td>
-            <td>{{ $box->price }}</td>
-
+            <td>{{ $box_details->price }}</td>
         </tr>
     </table>
 @endsection

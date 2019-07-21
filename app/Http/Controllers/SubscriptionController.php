@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Subscription;
 use App\Box;
 use App\DeliveryMethod;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
@@ -16,8 +18,27 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->hasRole('customer') == true) {
+            return 1334;
+        }
+
         $subscription = Subscription::orderby('created_at','desc')->get();
-        return view('subscriptions.index')->with('subscriptions', $subscription);
+        foreach ($subscription as $value) {
+            $user_id = $value['user_id'];
+            $box_id = $value['box_id'];
+            $delivery_method_id = $value['delivery_method_id'];
+        }
+        $user = User::find($user_id);
+        $box = Box::find($box_id);
+        $method = DeliveryMethod::find($delivery_method_id);
+
+        $data = array(
+            'subscriptions' =>$subscription,
+            'user' =>$user,
+            'box' =>$box,
+            'method' =>$method,
+            );
+        return view('subscriptions.index')->with($data);
     }
 
     /**
@@ -44,7 +65,19 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'DeliveryMethod' => 'required',
+        ]);
+
+        $subscription = new Subscription;
+        $subscription->user_id = Auth::user()->id;
+        $subscription->box_id = $request->input('box_id');
+        $subscription->delivery_method_id = $request->input('DeliveryMethod');
+        $subscription->status = 0;
+        //dd($subscription);
+        $subscription->save();
+
+        return redirect('/user/subscriptions')->with('success','Subscription Completed Successfully.');
     }
 
     /**

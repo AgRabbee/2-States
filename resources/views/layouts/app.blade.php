@@ -21,10 +21,12 @@
 </head>
 <body>
     <div id="app">
-        @include('inc.nav')
-
+    @include('inc.nav')
+    @include('inc.message')
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

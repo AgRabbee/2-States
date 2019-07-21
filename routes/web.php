@@ -17,7 +17,6 @@
 Route::get('/','BoxController@welcome');
 Auth::routes();
 
-Route::get('/dashboard','DashboardController@index');
 Route::get('signin', 'AuthController@getSignInPage');
 Route::post('signin', 'AuthController@postSignIn');
 Route::get('signup', 'AuthController@getSignUpPage');
@@ -51,6 +50,10 @@ Route::group(['middleware'=>['auth']],function(){
 });
 
 Route::group(['middleware'=>['auth','auth.customer']],function(){
+
+    Route::get('/dashboard','DashboardController@index');
+    
+    Route::get('/user/subscriptions','SubscriptionController@index');
     Route::get('/subscriptions/create/{id}','SubscriptionController@create');
     Route::post('/subscriptions/create','SubscriptionController@store');
 });
