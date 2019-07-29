@@ -17,7 +17,7 @@
         <select class="form-control" name="box_id" >
             @if (count($boxes)>0)
                 @foreach ($boxes as $box)
-                    <option value="{{ $box->id }}">{{ $box->name }}</option>
+                    <option value="{{ $box->id }}">{{ $box->box_name }}</option>
                 @endforeach
             @else
                 <p>No available box.</p>
@@ -30,7 +30,7 @@
         <select multiple class="form-control" name="products_id[]" >
             @if (count($products)>0)
                 @foreach ($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                    <option value="{{ $product->id }}">{{ $product->product_name }}</option>
                 @endforeach
             @else
                 <p>No available box.</p>

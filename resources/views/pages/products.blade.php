@@ -17,7 +17,7 @@
                 </li>
             </ul>
         @endforeach
-        {{ $products->links() }}
+
     @else
         <p>No products yet</p>
     @endif

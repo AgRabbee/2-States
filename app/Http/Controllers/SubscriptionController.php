@@ -8,6 +8,7 @@ use App\DeliveryMethod;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
 {
@@ -19,26 +20,30 @@ class SubscriptionController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('customer') == true) {
-            return 1334;
+            $user_id = Auth::user()->id;
+            $subscription = Subscription::where('user_id',$user_id)->get();
+            //dd($subscription);
+
+            return view('subscriptions.user_subscription')->with('user_subscription',$subscription);
         }
 
-        $subscription = Subscription::orderby('created_at','desc')->get();
-        foreach ($subscription as $value) {
-            $user_id = $value['user_id'];
-            $box_id = $value['box_id'];
-            $delivery_method_id = $value['delivery_method_id'];
-        }
-        $user = User::find($user_id);
-        $box = Box::find($box_id);
-        $method = DeliveryMethod::find($delivery_method_id);
+        //===================admin=========================
+        if (Auth::user()->hasRole('admin') == true) {
+            $subscriptions = Subscription::orderby('created_at','desc')->get();
+            /*$subscriptions = DB::table('box_products')
+                ->select('users.name as User, boxes.name as Box name, SUM(products.price) as Price, delivery_methods.method_name as Delivery method, subscription_types.subscription_type_name as Subscription Type, subscriptions.status as Status')
+                ->join('boxes', 'boxes.id', '=', 'box_products.box_id')
+                ->join('products', 'products.id', '=', 'box_products.product_id')
+                ->join('users', '.id', '=', 'subscriptions.user_id')
+                ->join('subscription_types', '.id', '=', 'subscriptions.subscription_type_id')
+                ->distinct()
+                ->get();
+*/
+                //dd($subscriptions);
 
-        $data = array(
-            'subscriptions' =>$subscription,
-            'user' =>$user,
-            'box' =>$box,
-            'method' =>$method,
-            );
-        return view('subscriptions.index')->with($data);
+
+            return view('subscriptions.index')->with('subscriptions',$subscriptions);
+        }
     }
 
     /**
@@ -46,15 +51,9 @@ class SubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $box = Box::find($id);
-        $methods = DeliveryMethod::all();
-        $data = array(
-            'box' => $box,
-            'methods' => $methods
-        );
-        return view('subscriptions.create')->with($data);
+         //
     }
 
     /**
@@ -65,14 +64,16 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'DeliveryMethod' => 'required',
-        ]);
 
+        $boxes = Box::all();
+        $random_id = $boxes->random()->id;
+
+        //dd($random_id);
         $subscription = new Subscription;
         $subscription->user_id = Auth::user()->id;
-        $subscription->box_id = $request->input('box_id');
-        $subscription->delivery_method_id = $request->input('DeliveryMethod');
+        $subscription->box_id = $random_id;
+        $subscription->delivery_method_id = 1;
+        $subscription->subscription_type_id = $request->input('type_id');
         $subscription->status = 0;
         //dd($subscription);
         $subscription->save();

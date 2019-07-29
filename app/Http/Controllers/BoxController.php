@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Box;
 use App\Product;
-use App\Box_products;
+use App\Box_product;
 use App\DeliveryMethod;
+use App\SubscriptionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -63,9 +64,41 @@ class BoxController extends Controller
      */
     public function show($id)
     {
+
         $box_details = Box::find($id);
+        return view('box.show')->with('box_details', $box_details);
+
+    /*    $product_details = DB::table('boxes')
+        ->select('products.name as productName')
+        ->join('box_products', 'boxes.id', '=', 'box_products.box_id')
+        ->join('products', 'products.id', '=', 'box_products.product_id')
+        ->where('boxes.id', $id)
+        ->get();
+
+          $box = Box::find($id);
+           $name = $box['name'];
+           $price = $box['price'];
+          //dd($name.$price);
+
+
+
+        //dd($data);
+
+         return view('box.show', compact('product_details','name','price'));
+         // return view('box.show')->with('box',$box);
+
+
+*/
+
+
+/*
+
+        //dd($box);
+        $box_details = Box::find($id)->toArray();
 
         $box_product = Box_products::where('box_id',$id)->get();
+
+        //dd($box_product);
 
         foreach ($box_product as $value) {
             $products_id[] = $value['product_id'];
@@ -76,12 +109,22 @@ class BoxController extends Controller
              $products_details[] = Product::find($id);
         }
 
-        $data = array([
-            'box_details'=> $box_details,
-            'products'=> $products_details,
-            ]);
+        $data = array(
+            'box_details' => $box_details,
+            'products' => $products_details,
+            );
             //dd($data);
         return view('box.show')->with($data);
+*/
+        //$box = Box_products::find($id)->get();
+        //$box= Box::all();
+        //dd($box_details->products);
+
+
+
+
+
+
 
     }
 
@@ -119,6 +162,8 @@ class BoxController extends Controller
         //
     }
 
+
+
     public function addProduct()
     {
         $box = Box::all();
@@ -130,25 +175,22 @@ class BoxController extends Controller
         return view('box.addProductToBox')->with($data);
     }
 
+
     public function storeProductInBox(Request $request){
         $this->validate($request,[
             'box_id' => 'required',
             'products_id' => 'required',
         ]);
 
+        $box_id = $request->input('box_id');
+        $product_id = $request->input('products_id');
+        $box = Box::find($box_id);
 
-        //dd($request->input('products_id'));
-        $id = $request->input('products_id');
-        //return $id;
-        for ($i=0; $i < count($id); $i++) {
-            $box_product = new Box_products;
-            $box_product->box_id = $request->input('box_id');
-            $box_product->product_id = $id[$i];
-
-            $box_product->save();
-
+        for ($i=0; $i < count($product_id); $i++) {
+            $box->products()->attach($product_id[$i]);
         }
 
+        //dd($box->products);
         //return 123;
         return redirect('/boxes')->with('success', 'Product added successfully.');
     }
@@ -156,9 +198,9 @@ class BoxController extends Controller
     //welcome view for customer
     public function welcome()
     {
-        $boxes = Box::orderby('created_at','desc')->paginate(5);
+        $subscriptionType = SubscriptionType::all();
 
-        return view('pages.index')->with('boxes',$boxes);
+        return view('pages.index')->with('subscriptionType',$subscriptionType);
     }
 
 

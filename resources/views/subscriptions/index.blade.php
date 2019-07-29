@@ -9,6 +9,7 @@
 @endsection
 
 @section('box_body')
+
     @if(count($subscriptions) > 0)
       <table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -17,16 +18,18 @@
           <th>Box Name</th>
           <th>Price</th>
           <th>Delivery Method</th>
+          <th>Subscription Type</th>
           <th>Status</th>
         </tr>
         </thead>
         <tbody>
     @foreach ($subscriptions as $subscription)
         <tr>
-          <td class="text-capitalize">{{ $user->name }}</td>
-          <td>{{ $box->name }}</td>
-          <td>{{ $box->price }}</td>
-          <td>{{ $method->method_name }}</td>
+          <td class="text-capitalize">{{ $subscription->user_id }}</td>
+          <td>{{ $subscription->box_id }}</td>
+          <td>{{ $subscription->price }}</td>
+          <td>{{ $subscription->delivery_method_id }}</td>
+          <td>{{ $subscription->subscription_type_id }}</td>
           <td>
               @if ( $subscription->status == 0)
                   {{ 'Active' }}
@@ -45,6 +48,7 @@
             <th>Box Name</th>
             <th>Price</th>
             <th>Delivery Method</th>
+            <th>Delivery Method</th>
             <th>Status</th>
         </tr>
         </tfoot>
@@ -52,6 +56,7 @@
     @else
         <p>No subscriptions yet.</p>
     @endif
+
 @endsection
 
 @section('box_footer')

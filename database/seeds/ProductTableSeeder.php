@@ -13,28 +13,33 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
         $product = new Product;
-        $product->name = 'Product One';
+        $product->product_name = 'Product One';
         $product->description = 'Product One description';
+        $product->price = '80';
         $product->save();
 
         $product = new Product;
-        $product->name = 'Product Two';
+        $product->product_name = 'Product Two';
         $product->description = 'Product Two description';
+        $product->price = '70';
         $product->save();
 
         $product = new Product;
-        $product->name = 'Product Three';
+        $product->product_name = 'Product Three';
         $product->description = 'Product Three description';
+        $product->price = '90';
         $product->save();
 
         $product = new Product;
-        $product->name = 'Product Four';
+        $product->product_name = 'Product Four';
         $product->description = 'Product Four description';
+        $product->price = '75';
         $product->save();
 
         $product = new Product;
-        $product->name = 'Product Five';
+        $product->product_name = 'Product Five';
         $product->description = 'Product Five description';
+        $product->price = '100';
         $product->save();
     }
 }

@@ -32,12 +32,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/products/add','ProductController@store');
     Route::get('/product/show/{id}','ProductController@show');
 
-
-
-
-
-
-
+//==================box========================
     Route::get('/boxes','BoxController@index');
     Route::get('/box/add','BoxController@create');
     Route::post('/box/add','BoxController@store');
@@ -52,8 +47,7 @@ Route::group(['middleware'=>['auth']],function(){
 Route::group(['middleware'=>['auth','auth.customer']],function(){
 
     Route::get('/dashboard','DashboardController@index');
-    
+
     Route::get('/user/subscriptions','SubscriptionController@index');
-    Route::get('/subscriptions/create/{id}','SubscriptionController@create');
     Route::post('/subscriptions/create','SubscriptionController@store');
 });

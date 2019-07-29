@@ -12,6 +12,7 @@
     <h2>{{ $product->name }}</h2>
     <hr>
     <p>{{ $product->description }}</p>
+    <p><strong>Price: </strong>{{ $product->price }}</p>
 @endsection
 
 @section('box_footer')

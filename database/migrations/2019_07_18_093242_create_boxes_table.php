@@ -15,8 +15,7 @@ class CreateBoxesTable extends Migration
     {
         Schema::create('boxes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->integer('price');
+            $table->string('box_name');
             $table->integer('rating')->nullable();
             $table->timestamps();
         });

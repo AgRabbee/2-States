@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBoxProductsTable extends Migration
+class CreateSubscriptionTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateBoxProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('box_products', function (Blueprint $table) {
+        Schema::create('subscription_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('box_id');
-            $table->integer('product_id');
+            $table->string('subscription_type_name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateBoxProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('box_products');
+        Schema::dropIfExists('subscription_types');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
 use App\User;
+//use Closure;
 
 class AuthController extends Controller
 {
@@ -35,9 +36,9 @@ class AuthController extends Controller
             if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('manager')){
                 return redirect('/admin/dashboard');
             }elseif(Auth::user()->hasRole('customer')) {
+                //return $next($request);
                 return redirect('/dashboard');
             }
-
         }
         return redirect()->back();
     }

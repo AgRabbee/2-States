@@ -13,7 +13,7 @@
         @foreach ($boxes as $box)
             <ul>
                 <li>
-                    <a href="/box/show/{{$box->id}}">{{ $box->name }}</a>
+                    <a href="/box/show/{{$box->id}}">{{ $box->box_name }}</a>
                 </li>
             </ul>
         @endforeach

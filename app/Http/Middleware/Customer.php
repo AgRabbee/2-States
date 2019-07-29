@@ -16,7 +16,8 @@ class Customer
      */
     public function handle($request, Closure $next)
     {
-        if ((Auth::user()->hasRole('Customer') == true)) {
+        if ((Auth::user()->hasRole('Customer') == 'customer')) {
+            //return redirect('/232135');
             return $next($request);
         }
         return redirect()->back();

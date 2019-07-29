@@ -16,19 +16,22 @@
             <th>Price</th>
         </tr>
         <tr>
-            <td>{{ $box_details->name }}</td>
+            <td>{{ $box_details->box_name }}</td>
             <td>
+                @if (count($box_details->products)>0)
+
                 <ul>
-                    @if(count($products) > 0)
-                        @foreach ($products as $product)
-                            <li>{{ $product->name }}</li>
-                        @endforeach
-                    @else
-                        No available Products
-                    @endif
+                @foreach ($box_details->products as $value)
+                    <li>{{ $value->product_name }}</li>
+                @endforeach
                 </ul>
+                @else
+                    <p>No available product yet..</p>
+                @endif
             </td>
-            <td>{{ $box_details->price }}</td>
+            <td>
+                {{ $box_details->products->sum('price') }}
+            </td>
         </tr>
     </table>
 @endsection

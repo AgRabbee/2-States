@@ -13,28 +13,23 @@ class BoxTableSeeder extends Seeder
     public function run()
     {
         $box = new Box;
-        $box->name = 'Box one';
-        $box->price = '70';
+        $box->box_name = 'Box one';
         $box->save();
 
         $box = new Box;
-        $box->name = 'Box two';
-        $box->price = '80';
+        $box->box_name = 'Box two';
         $box->save();
 
         $box = new Box;
-        $box->name = 'Box three';
-        $box->price = '100';
+        $box->box_name = 'Box three';
         $box->save();
 
         $box = new Box;
-        $box->name = 'Box four';
-        $box->price = '110';
+        $box->box_name = 'Box four';
         $box->save();
 
         $box = new Box;
-        $box->name = 'Box five';
-        $box->price = '90';
+        $box->box_name = 'Box five';
         $box->save();
     }
 }
