@@ -56,4 +56,32 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function boxes()
+    {
+        //return $this->belongsToMany(Box::class,'subscriptions');
+        return $this->belongsToMany('App\Box','subscriptions','user_id','box_id')->withPivot('status');
+        //return $this->belongsToMany('App\Product','box_product','box_id','product_id');
+    }
+
+    public function delivery_methods()
+    {
+        //return $this->belongsToMany(DeliveryMethod::class,'subscriptions');
+        return $this->belongsToMany('App\DeliveryMethod','subscriptions','user_id','delivery_method_id');
+        //return $this->belongsToMany('App\Product','box_product','box_id','product_id');
+    }
+
+    public function subscription_types()
+    {
+        //return $this->belongsToMany(DeliveryMethod::class,'subscriptions');
+        return $this->belongsToMany('App\SubscriptionType','subscriptions','user_id','subscription_type_id');
+        //return $this->belongsToMany('App\Product','box_product','box_id','product_id');
+    }
+
+    public function subscriptions()
+    {
+        //return $this->belongsToMany(DeliveryMethod::class,'subscriptions');
+        return $this->belongsToMany('App\Subscription','subscriptions','user_id');
+        //return $this->belongsToMany('App\Product','box_product','box_id','product_id');
+    }
 }

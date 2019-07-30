@@ -20,11 +20,11 @@
             <td>
                 @if (count($box_details->products)>0)
 
-                <ul>
-                @foreach ($box_details->products as $value)
-                    <li>{{ $value->product_name }}</li>
-                @endforeach
-                </ul>
+                    <ul>
+                    @foreach ($box_details->products as $value)
+                        <li>{{ $value->product_name }}</li>
+                    @endforeach
+                    </ul>
                 @else
                     <p>No available product yet..</p>
                 @endif

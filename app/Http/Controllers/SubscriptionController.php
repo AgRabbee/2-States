@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Subscription;
 use App\Box;
 use App\DeliveryMethod;
 use App\User;
+use App\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +21,13 @@ class SubscriptionController extends Controller
     {
         if (Auth::user()->hasRole('customer') == true) {
             $user_id = Auth::user()->id;
-            $subscription = Subscription::where('user_id',$user_id)->get();
-            //dd($subscription);
+            //$subscription = Subscription::where('user_id',$user_id)->get()->toArray();
+
+            $subscription = User::find($user_id);
+            //dd($subscription)->count();
+
+
+
 
             return view('subscriptions.user_subscription')->with('user_subscription',$subscription);
         }

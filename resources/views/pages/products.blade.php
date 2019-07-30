@@ -13,7 +13,7 @@
         @foreach ($products as $product)
             <ul>
                 <li>
-                    <a href="/product/show/{{$product->id}}">{{ $product->name }}</a>
+                    <a href="/product/show/{{$product->id}}">{{ $product->product_name }}</a>
                 </li>
             </ul>
         @endforeach
