@@ -19,7 +19,7 @@ class BoxController extends Controller
      */
     public function index()
     {
-        $boxes = Box::orderby('created_at','desc')->paginate(5);
+        $boxes = Box::orderby('created_at','desc')->get();
         return view('box.index')->with('boxes',$boxes);
     }
 
@@ -44,12 +44,10 @@ class BoxController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required',
-            'price' => 'required'
+            'name' => 'required'
         ]);
         $box = new Box;
-        $box->name = $request->input('name');
-        $box->price = $request->input('price');
+        $box->box_name = $request->input('name');
         $box->save();
 
         return redirect('/boxes')->with('success', 'Box created successfully.');

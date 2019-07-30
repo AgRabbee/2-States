@@ -1,24 +1,24 @@
 @extends('layouts.admin')
 
 @section('page_header')
-    The Booty Boxes
+    Subscription Types
 @endsection
 
 @section('box_header')
-    Add New boxes
+    Add New Subscription Type
 @endsection
 
 @section('box_body')
-    <form action="{{ url('/box/add') }}" method="POST">
+    <form action="{{ url('/type/add') }}" method="POST">
         {{ csrf_field() }}
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Booty Box name">
+        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Subscription Type Name">
       </div>
 
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-sm">Add Product</button>
+          <button type="submit" class="btn btn-primary btn-sm">Add Type</button>
         </div>
         <!-- /.col -->
       </div>

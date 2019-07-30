@@ -40,7 +40,24 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/box/add/product','BoxController@addProduct');
     Route::post('/box/add/product','BoxController@storeProductInBox');
 
+//==================delivery methods========================
+    Route::get('/methods','DeliveryMethodController@index');
+    Route::get('/method/add','DeliveryMethodController@create');
+    Route::post('/method/add','DeliveryMethodController@store');
+
+
+//==================subscriptions types========================
+    Route::get('/types','SubscriptionController@allTypes');
+    Route::get('/type/add','SubscriptionController@createType');
+    Route::post('/type/add','SubscriptionController@addType');
+
+
+//==================subscriptions ========================
     Route::get('/subscriptions','SubscriptionController@index');
+
+
+
+//==================Subscription types========================
 
 });
 

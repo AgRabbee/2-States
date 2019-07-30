@@ -14,7 +14,9 @@ class DeliveryMethodController extends Controller
      */
     public function index()
     {
-        //
+        $methods = DeliveryMethod::all();
+
+        return view('Methods.index')->with('methods', $methods);
     }
 
     /**
@@ -24,7 +26,7 @@ class DeliveryMethodController extends Controller
      */
     public function create()
     {
-        //
+        return view('Methods.create');
     }
 
     /**
@@ -35,7 +37,15 @@ class DeliveryMethodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required'
+        ]);
+
+        $method = new DeliveryMethod;
+        $method->method_name = $request->input('name');
+        $method->save();
+
+        return redirect('/methods')->with('success', 'Method added successfully');
     }
 
     /**

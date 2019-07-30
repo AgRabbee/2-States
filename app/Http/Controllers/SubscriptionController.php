@@ -6,6 +6,7 @@ use App\Box;
 use App\DeliveryMethod;
 use App\User;
 use App\Subscription;
+use App\SubscriptionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,10 @@ class SubscriptionController extends Controller
 
         //===================admin=========================
         if (Auth::user()->hasRole('admin') == true) {
-            $subscriptions = Subscription::orderby('created_at','desc')->get();
+            //$subscriptions = Subscription::with('boxes')->first();
+            $subscriptions = Subscription::all();
+            //$subscriptions = User::toArray();
+
             /*$subscriptions = DB::table('box_products')
                 ->select('users.name as User, boxes.name as Box name, SUM(products.price) as Price, delivery_methods.method_name as Delivery method, subscription_types.subscription_type_name as Subscription Type, subscriptions.status as Status')
                 ->join('boxes', 'boxes.id', '=', 'box_products.box_id')
@@ -129,5 +133,29 @@ class SubscriptionController extends Controller
     public function destroy(Subscription $subscription)
     {
         //
+    }
+
+    public function allTypes()
+    {
+        $types = SubscriptionType::all();
+
+        return view('subscriptions.show')->with('types',$types);
+    }
+
+    public function createType()
+    {
+        return view('subscriptions.createType');
+    }
+    public function addType(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required'
+        ]);
+
+        $type = new SubscriptionType;
+        $type->subscription_type_name = $request->input('name');
+        $type->save();
+
+        return redirect('/types')->with('success', 'Subscription Type added succesfully.');
     }
 }

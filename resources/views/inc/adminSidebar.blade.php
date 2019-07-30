@@ -61,6 +61,30 @@
           <li><a href="{{ url('/subscriptions') }}"><i class="fa fa-circle-o"></i> All Subscriptions</a></li>
         </ul>
       </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-dashboard"></i> <span>Delivery Methods</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ url('/method/add') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
+          <li><a href="{{ url('/methods') }}"><i class="fa fa-circle-o"></i> All Methods</a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-dashboard"></i> <span>Subscription Types</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ url('/type/add') }}"><i class="fa fa-circle-o"></i> Add New</a></li>
+          <li><a href="{{ url('/types') }}"><i class="fa fa-circle-o"></i> All Subscription Types</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

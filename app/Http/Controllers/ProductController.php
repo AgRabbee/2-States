@@ -38,12 +38,14 @@ class ProductController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
+            'price' => 'required|numeric',
             'description' => 'required'
         ]);
 
         $product = new Product;
-        $product->name = $request->input('name');
+        $product->product_name = $request->input('name');
         $product->description = $request->input('description');
+        $product->price = $request->input('price');
         $product->save();
 
         return redirect('/products')->with('success','Product Successfully Added!!');

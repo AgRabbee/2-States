@@ -1,26 +1,26 @@
 @extends('layouts.admin')
 
 @section('page_header')
-    The Booty Boxes
+    Delivery Methods
 @endsection
 
 @section('box_header')
-    All Booty Boxes
+    All Delivery Methods
 @endsection
 
 @section('box_body')
-    @if(count($boxes) > 0)
-        @foreach ($boxes as $box)
+    @if(count($methods) > 0)
+        @foreach ($methods as $method)
             <ul>
                 <li>
-                    <a href="/box/show/{{$box->id}}">{{ $box->box_name }}</a>
+                    {{ $method->method_name }}
                 </li>
             </ul>
         @endforeach
-    
+
     @else
         <p>No available booty box.
-            <a href="{{ url('/box/add') }}">Create one</a>
+            <a href="{{ url('/method/add') }}">Create one</a>
         </p>
     @endif
 @endsection

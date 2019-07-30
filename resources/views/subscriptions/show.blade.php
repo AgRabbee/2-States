@@ -1,26 +1,26 @@
 @extends('layouts.admin')
 
 @section('page_header')
-    The Booty Boxes
+    Subscription Types
 @endsection
 
 @section('box_header')
-    All Booty Boxes
+    All Subscription Types
 @endsection
 
 @section('box_body')
-    @if(count($boxes) > 0)
-        @foreach ($boxes as $box)
+    @if(count($types) > 0)
+        @foreach ($types as $type)
             <ul>
                 <li>
-                    <a href="/box/show/{{$box->id}}">{{ $box->box_name }}</a>
+                    {{ $type->subscription_type_name }}
                 </li>
             </ul>
         @endforeach
-    
+
     @else
         <p>No available booty box.
-            <a href="{{ url('/box/add') }}">Create one</a>
+            <a href="{{ url('/type/add') }}">Create one</a>
         </p>
     @endif
 @endsection

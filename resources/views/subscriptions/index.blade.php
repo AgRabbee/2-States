@@ -10,52 +10,49 @@
 
 @section('box_body')
 
-    @if(count($subscriptions) > 0)
-      <table id="example1" class="table table-bordered table-striped">
+
+      <table id="example1" class="table table-bordered table-hover">
         <thead>
         <tr>
           <th>User Name</th>
           <th>Box Name</th>
-          <th>Price</th>
           <th>Delivery Method</th>
           <th>Subscription Type</th>
           <th>Status</th>
         </tr>
         </thead>
         <tbody>
-    @foreach ($subscriptions as $subscription)
-        <tr>
-          <td class="text-capitalize">{{ $subscription->user_id }}</td>
-          <td>{{ $subscription->box_id }}</td>
-          <td>{{ $subscription->price }}</td>
-          <td>{{ $subscription->delivery_method_id }}</td>
-          <td>{{ $subscription->subscription_type_id }}</td>
-          <td>
-              @if ( $subscription->status == 0)
-                  {{ 'Active' }}
-              @elseif ($subscription->status == 1)
-                  {{ 'Paused' }}
-              @elseif ($subscription->status == 1)
-                  {{ 'Delivered' }}
-              @endif
-          </td>
-        </tr>
-    @endforeach
+
+        @foreach ($subscriptions as $value)
+            <tr>
+                <td>{{ $value->users->name}}</td>
+                <td>{{ $value->boxes->box_name}}</td>
+                <td>{{ $value->delivery_methods->method_name}}</td>
+                <td>{{ $value->subscription_types->subscription_type_name}}</td>
+                <td>    @if ($value->status == 0)
+                        <div class="p-1 bg-primary text-white text-center">Active</div>
+                    @elseif ($value->status == 1)
+                        <div class="p-1 bg-danger text-white text-center">Paused</div>
+                    @elseif ($value->status == 2)
+                        <div class="p-1 bg-secondary text-white text-center">Delivered</div>
+                @endif
+                </td>
+            </tr>
+        @endforeach
+
         </tbody>
         <tfoot>
         <tr>
             <th>User Name</th>
             <th>Box Name</th>
-            <th>Price</th>
             <th>Delivery Method</th>
             <th>Delivery Method</th>
             <th>Status</th>
         </tr>
         </tfoot>
       </table>
-    @else
-        <p>No subscriptions yet.</p>
-    @endif
+
+
 
 @endsection
 

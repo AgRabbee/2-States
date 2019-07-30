@@ -9,10 +9,11 @@
 @endsection
 
 @section('box_body')
-    <h2>{{ $product->name }}</h2>
+    <h2 class="text-uppercase">{{ $product->product_name }}</h2>
+    <small><strong>Price: </strong>{{ $product->price }}</small>
     <hr>
-    <p>{{ $product->description }}</p>
-    <p><strong>Price: </strong>{{ $product->price }}</p>
+    <p class="text-capitalize">{{ $product->description }}</p>
+
 @endsection
 
 @section('box_footer')

@@ -43,6 +43,13 @@
                                 </a>
                             @endif
 
+                            @if (Auth::user()->hasRole('customer'))
+
+                                <a href="{{ url('/user/subscriptions') }}" class="dropdown-item" >
+                                    Your Subscriptions
+                                </a>
+                            @endif
+
                             <a class="dropdown-item" href="{{ url('/signout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
